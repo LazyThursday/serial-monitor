@@ -2,11 +2,16 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   position: relative;
   color: white;
   height: 100vh;
-  background: rgb(33, 33, 33);
+  background: #313233;
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
@@ -19,10 +24,11 @@ button {
   padding: 10px 20px;
   border-radius: 10px;
   border: none;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   font-size: 1.3rem;
-  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12),
-    0px 18px 88px -4px rgba(24, 39, 75, 0.14);
+  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14);
   transition: all ease-in 0.1s;
   cursor: pointer;
   opacity: 0.9;
@@ -39,7 +45,11 @@ li {
 
 a {
   text-decoration: none;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   margin: 10px;
 }
@@ -49,9 +59,31 @@ a:hover {
   text-decoration: none;
 }
 
-.Hello {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+input {
+  padding: 8px 12px;
+  background: rgb(33, 33, 34);
+  border: 1px solid rgb(15, 15, 16);
+  border-radius: 4px;
+  font-size: 13px;
+  color: rgb(247, 248, 248);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  transition: border 0.15s ease 0s;
+}
+input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: rgb(100, 153, 255);
+}
+
+.chart-container {
+  background-color: #2b2b2b;
+  padding: 1.25rem;
+  border-radius: 1rem;
+}
+.chart-container input {
+  margin-bottom: 30px;
+  margin-left: 0.25rem;
+  margin-right: 2rem;
 }
