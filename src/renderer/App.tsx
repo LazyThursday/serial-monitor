@@ -12,7 +12,11 @@ import {
 import './App.css';
 
 type MyData = { time: number; value: number };
-type UserPref = { min: number | null; max: number | null; range: number };
+type UserPref = {
+  min: number | null;
+  max: number | null;
+  range: number | null;
+};
 
 const Hello = () => {
   const [data, setData] = useState<MyData[]>([]);
@@ -36,6 +40,9 @@ const Hello = () => {
   }, []);
 
   function updatePref(newValue: number, prefToChange: string) {
+    if (isNaN(newValue)) {
+      newValue = null;
+    }
     setPref((prev) => {
       return { ...prev, [prefToChange]: newValue };
     });
@@ -55,7 +62,7 @@ const Hello = () => {
     }
 
     return newArr;
-  }, [data]);
+  }, [data, pref.range]);
 
   const domain = useMemo(() => {
     const onlyData = chartData.map((datum) => datum.value);
@@ -63,32 +70,35 @@ const Hello = () => {
     const max =
       pref.max && !(pref.max <= min) ? pref.max : Math.max(...onlyData);
     return { min, max };
-  }, [chartData]);
+  }, [chartData, pref.max, pref.min]);
 
   return (
     <div className="chart-container">
-      <label>
+      <label htmlFor="min">
         min:
         <input
           placeholder="min"
+          id="min"
           onChange={(e) =>
             updatePref(parseFloat(e.target.value), e.target.placeholder)
           }
         />
       </label>
-      <label>
+      <label htmlFor="max">
         max:
         <input
           placeholder="max"
+          id="max"
           onChange={(e) =>
             updatePref(parseFloat(e.target.value), e.target.placeholder)
           }
         />
       </label>
-      <label>
+      <label htmlFor="range">
         range:
         <input
           placeholder="range"
+          id="range"
           value={isNaN(pref.range) ? '' : pref.range}
           onChange={(e) =>
             updatePref(parseFloat(e.target.value), e.target.placeholder)
@@ -101,6 +111,7 @@ const Hello = () => {
         <XAxis dataKey="time" />
         <YAxis domain={[domain.min, domain.max]} />
       </LineChart>
+      <h2>{data.length}</h2>
     </div>
   );
 };
