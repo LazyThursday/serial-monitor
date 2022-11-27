@@ -81,6 +81,7 @@ input:focus {
   background-color: #2b2b2b;
   padding: 1.25rem;
   border-radius: 1rem;
+  margin: 1rem;
 }
 .chart-container input {
   margin-bottom: 30px;

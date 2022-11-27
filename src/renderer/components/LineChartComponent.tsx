@@ -1,25 +1,17 @@
-import { useEffect, useState, useMemo } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from 'recharts';
+import { useEffect, useState, useMemo, FC } from 'react';
+import { LineChart, Line, XAxis, YAxis } from 'recharts';
 
-type MyData = { time: number; value: number };
 type UserPref = {
   min: number | null;
   max: number | null;
   range: number | null;
 };
+interface Props {
+  title: string;
+}
 
-const maxSize = 5000;
-
-const LineChartComponent = () => {
-  const [data, setData] = useState<MyData[]>([]);
+const LineChartComponent: FC<Props> = ({ title }) => {
+  const [data, setData] = useState<{ value: number; time: number }[]>([]);
   const [pref, setPref] = useState<UserPref>({
     min: null,
     max: null,
@@ -29,19 +21,15 @@ const LineChartComponent = () => {
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    window.electron.ipcRenderer.on('serialport', (datum: string) => {
-      setData((prev) => {
-        const newData = parseFloat(datum);
-        const newTime = Date.now();
-        const newDataPoint = { time: newTime, value: newData };
-        const newArr =
-          prev.length < 7000
-            ? [...prev, newDataPoint]
-            : [...prev.slice(0, 5000), newDataPoint];
-        return newArr;
-      });
+    window.electron.ipcRenderer.on('serialport', (datum: SerialEvent) => {
+      if (datum.title === title) {
+        setData((prev) => [
+          ...prev,
+          { value: Number(datum.value), time: Date.now() },
+        ]);
+      }
     });
-  }, []);
+  }, [title]);
 
   function updatePref(newValue: number, prefToChange: string) {
     // eslint-disable-next-line no-restricted-globals
@@ -73,7 +61,7 @@ const LineChartComponent = () => {
   }, [data, pref.range]);
 
   const domain = useMemo(() => {
-    const onlyData = chartData.map((datum) => datum.value);
+    const onlyData: number[] = chartData.map((datum) => datum.value);
     const min = pref.min ? pref.min : Math.min(...onlyData);
     const max =
       pref.max && !(pref.max <= min) ? pref.max : Math.max(...onlyData);
@@ -82,6 +70,7 @@ const LineChartComponent = () => {
 
   return (
     <div className="chart-container">
+      <h1>{title}</h1>
       <label htmlFor="min">
         min:
         <input
