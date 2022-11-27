@@ -9,12 +9,10 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import { SerialPort, ReadlineParser } from 'serialport';
-import { MockBinding } from '@serialport/binding-mock';
-import { SerialPortStream } from '@serialport/stream';
+import emulateSerial from './serialEmulator';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
@@ -27,27 +25,6 @@ class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
-
-MockBinding.createPort('COM22', { echo: true, record: true });
-const mockPort = new SerialPortStream({
-  binding: MockBinding,
-  path: 'COM22',
-  baudRate: 14400,
-});
-const parser = new ReadlineParser();
-mockPort.pipe(parser);
-parser.on('data', (data) => {
-  mainWindow?.webContents.send('serialport', data);
-});
-
-mockPort.on('open', () => {
-  console.log('here');
-
-  setInterval(() => {
-    const randomNumber = Math.floor(Math.random() * 100);
-    mockPort.port?.emitData(`${randomNumber}\n`);
-  }, 10);
-});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -125,6 +102,8 @@ const createWindow = async () => {
     shell.openExternal(edata.url);
     return { action: 'deny' };
   });
+
+  if (mainWindow) emulateSerial(mainWindow, 'COM22');
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
