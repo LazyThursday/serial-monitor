@@ -44,7 +44,8 @@ mockPort.on('open', () => {
   console.log('here');
 
   setInterval(() => {
-    mockPort.port?.emitData('22\n');
+    const randomNumber = Math.floor(Math.random() * 100);
+    mockPort.port?.emitData(`${randomNumber}\n`);
   }, 10);
 });
 

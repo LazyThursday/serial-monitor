@@ -18,7 +18,9 @@ type UserPref = {
   range: number | null;
 };
 
-const Hello = () => {
+const maxSize = 5000;
+
+const LineChartComponent = () => {
   const [data, setData] = useState<MyData[]>([]);
   const [pref, setPref] = useState<UserPref>({
     min: null,
@@ -34,14 +36,22 @@ const Hello = () => {
         const newData = parseFloat(datum);
         const newTime = Date.now();
         const newDataPoint = { time: newTime, value: newData };
-        return [...prev, newDataPoint];
+        const newArr =
+          prev.length < 7000
+            ? [...prev, newDataPoint]
+            : [...prev.slice(0, 5000), newDataPoint];
+        return newArr;
       });
     });
   }, []);
 
   function updatePref(newValue: number, prefToChange: string) {
+    // eslint-disable-next-line no-restricted-globals
     if (isNaN(newValue)) {
-      newValue = null;
+      setPref((prev) => {
+        return { ...prev, [prefToChange]: null };
+      });
+      return;
     }
     setPref((prev) => {
       return { ...prev, [prefToChange]: newValue };
@@ -99,7 +109,6 @@ const Hello = () => {
         <input
           placeholder="range"
           id="range"
-          value={isNaN(pref.range) ? '' : pref.range}
           onChange={(e) =>
             updatePref(parseFloat(e.target.value), e.target.placeholder)
           }
@@ -120,7 +129,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Hello />} />
+        <Route path="/" element={<lineChart />} />
       </Routes>
     </Router>
   );
