@@ -13,6 +13,8 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { SerialPort, ReadlineParser } from 'serialport';
+import { MockBinding } from '@serialport/binding-mock';
+import { SerialPortStream } from '@serialport/stream';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
@@ -26,11 +28,24 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-const serialport = new SerialPort({ path: 'COM3', baudRate: 9600 });
+MockBinding.createPort('COM22', { echo: true, record: true });
+const mockPort = new SerialPortStream({
+  binding: MockBinding,
+  path: 'COM22',
+  baudRate: 14400,
+});
 const parser = new ReadlineParser();
-serialport.pipe(parser);
+mockPort.pipe(parser);
 parser.on('data', (data) => {
   mainWindow?.webContents.send('serialport', data);
+});
+
+mockPort.on('open', () => {
+  console.log('here');
+
+  setInterval(() => {
+    mockPort.port?.emitData('22\n');
+  }, 10);
 });
 
 if (process.env.NODE_ENV === 'production') {
