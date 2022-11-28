@@ -40,7 +40,13 @@ function emulateSerial(window: BrowserWindow, portName: string) {
       mockPort.port?.emitData(emulateData(100, 'Random', ChartType.Line));
     }, 100);
     setInterval(() => {
-      mockPort.port?.emitData(emulateData(1000, 'OtherRandom', ChartType.Line));
+      mockPort.port?.emitData(emulateData(1000, 'Random2', ChartType.Line));
+    }, 100);
+    setInterval(() => {
+      mockPort.port?.emitData(emulateData(1000, 'Random3', ChartType.Line));
+    }, 100);
+    setInterval(() => {
+      mockPort.port?.emitData(emulateData(1000, 'Random4', ChartType.Line));
     }, 100);
   });
 }

@@ -10,12 +10,15 @@
 body {
   position: relative;
   color: white;
-  height: 100vh;
   background: #313233;
   font-family: sans-serif;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -34,7 +37,6 @@ button {
 }
 
 button:hover {
-  transform: scale(1.05);
   opacity: 1;
 }
 
@@ -56,3 +58,4 @@ a:hover {
 
 @import 'globalInput';
 @import 'chart';
+@import 'utilityBar';

@@ -1,0 +1,21 @@
+.utilityBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 10px;
+
+  * {
+    margin: 0 5px;
+  }
+
+  button {
+    height: 36px;
+    font-size: medium;
+    border-radius: 0;
+  }
+}
+
+.dropdown {
+  max-width: 300px;
+  min-width: 200px;
+}

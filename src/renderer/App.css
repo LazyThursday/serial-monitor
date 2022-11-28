@@ -10,13 +10,16 @@
 body {
   position: relative;
   color: white;
-  height: 100vh;
   background: #313233;
   font-family: sans-serif;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   display: flex;
-  justify-content: center;
   align-items: center;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
 button {
@@ -35,7 +38,6 @@ button {
 }
 
 button:hover {
-  transform: scale(1.05);
   opacity: 1;
 }
 
@@ -87,4 +89,35 @@ input:focus {
   margin-bottom: 30px;
   margin-left: 0.25rem;
   margin-right: 2rem;
+}
+
+.chartGroup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.utilityBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 10px;
+}
+.utilityBar * {
+  margin: 0 5px;
+}
+.utilityBar button {
+  height: 36px;
+  font-size: medium;
+  border-radius: 0;
+}
+
+.dropdown {
+  max-width: 300px;
+  min-width: 200px;
 }

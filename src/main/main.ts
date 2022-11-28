@@ -12,6 +12,7 @@ import path from 'path';
 import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import handleSerialPort from './serialMonitorHandler';
 import emulateSerial from './serialEmulator';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
@@ -103,7 +104,10 @@ const createWindow = async () => {
     return { action: 'deny' };
   });
 
-  if (mainWindow) emulateSerial(mainWindow, 'COM22');
+  if (mainWindow) {
+    // emulateSerial(mainWindow, 'COM22');
+    handleSerialPort(mainWindow);
+  }
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line

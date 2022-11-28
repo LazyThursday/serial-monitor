@@ -62,9 +62,11 @@ const LineChartComponent: FC<Props> = ({ title }) => {
 
   const domain = useMemo(() => {
     const onlyData: number[] = chartData.map((datum) => datum.value);
-    const min = pref.min ? pref.min : Math.min(...onlyData);
+    const min = pref.min !== null ? pref.min : Math.min(...onlyData);
     const max =
-      pref.max && !(pref.max <= min) ? pref.max : Math.max(...onlyData);
+      pref.max !== null && !(pref.max <= min)
+        ? pref.max
+        : Math.max(...onlyData);
     return { min, max };
   }, [chartData, pref.max, pref.min]);
 
