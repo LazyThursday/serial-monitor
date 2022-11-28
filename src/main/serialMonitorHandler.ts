@@ -15,7 +15,6 @@ function parseData(data: string) {
 export default function handleSerialPort(window: BrowserWindow) {
   ipcMain.on('scanSerial', async (event, arg) => {
     const results = await SerialPort.list();
-    console.log(results);
     event.reply('scanSerial', results);
   });
 

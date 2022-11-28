@@ -121,3 +121,35 @@ input:focus {
   max-width: 300px;
   min-width: 200px;
 }
+
+.rawSerial {
+  background-color: #2b2b2b;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  height: 50vh;
+  overflow-y: scroll;
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+.rawSerial::-webkit-scrollbar {
+  width: 10px;
+}
+.rawSerial::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.rawSerial::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+.rawSerial::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.rawSerialWrapper {
+  background-color: #2b2b2b;
+  border-radius: 1rem;
+  padding: 1rem 0.5rem;
+  margin: 1rem;
+}

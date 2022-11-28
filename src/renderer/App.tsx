@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import UtilityBar from './components/UtilityBar';
 import 'react-dropdown/style.css';
 import LineChartComponent from './components/LineChartComponent';
+import RawSerial from './components/RawSerial';
 import './App.css';
 
 type SerialEvent = {
@@ -24,7 +25,7 @@ function MainPage() {
       }
       const currentTitle = datum.title;
       setTitles((prev) => {
-        if (prev.includes(currentTitle)) {
+        if (currentTitle === 'default' || prev.includes(currentTitle)) {
           return prev;
         }
         return [...prev, currentTitle];
@@ -35,6 +36,7 @@ function MainPage() {
   return (
     <div className="chartsGroup-container">
       <UtilityBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <RawSerial />
       {titles.map((title) => {
         return <LineChartComponent title={title} key={title} />;
       })}
