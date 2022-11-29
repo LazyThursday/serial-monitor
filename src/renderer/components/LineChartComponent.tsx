@@ -6,6 +6,11 @@ type UserPref = {
   max: number | null;
   range: number | null;
 };
+type SerialEvent = {
+  title: string;
+  value: string;
+  chartType: string;
+};
 interface Props {
   title: string;
 }
@@ -19,16 +24,23 @@ const LineChartComponent: FC<Props> = ({ title }) => {
   });
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.electron.ipcRenderer.on('serialport', (datum: SerialEvent) => {
-      if (datum.title === title) {
-        setData((prev) => [
-          ...prev,
-          { value: Number(datum.value), time: Date.now() },
-        ]);
+    const removeListener = window.electron.ipcRenderer.on(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      'serialport',
+      (datum: SerialEvent) => {
+        if (datum.title === title) {
+          setData((prev) => [
+            ...prev,
+            { value: Number(datum.value), time: Date.now() },
+          ]);
+        }
       }
-    });
+    );
+
+    return () => {
+      if (removeListener) removeListener();
+    };
   }, [title]);
 
   function updatePref(newValue: number, prefToChange: string) {

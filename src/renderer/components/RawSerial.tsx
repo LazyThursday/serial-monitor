@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
+type SerialEvent = {
+  title: string;
+  value: string;
+  chartType: string;
+};
+
 const RawSerial = () => {
   const [data, setData] = useState<{ value: string; time: number }[]>([]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.electron.ipcRenderer.on('serialport', (datum: SerialEvent) => {
-      if (datum.title === 'default') {
-        setData((prev) => [...prev, { value: datum.value, time: Date.now() }]);
-      }
-    });
-
-    return () => {
+    const removeListener = window.electron.ipcRenderer.on(
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      window.electron.ipcRenderer.removeListener('serialport');
+      'serialport',
+      (datum: SerialEvent) => {
+        if (datum.title === 'default') {
+          setData((prev) => [
+            ...prev,
+            { value: datum.value, time: Date.now() },
+          ]);
+        }
+      }
+    );
+
+    return () => {
+      if (removeListener) removeListener();
     };
   }, []);
   return (

@@ -17,20 +17,26 @@ function MainPage() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.electron.ipcRenderer.on('serialport', (datum: SerialEvent) => {
-      if (!isOpen) {
-        setIsOpen(true);
-      }
-      const currentTitle = datum.title;
-      setTitles((prev) => {
-        if (currentTitle === 'default' || prev.includes(currentTitle)) {
-          return prev;
+    const removeListener = window.electron.ipcRenderer.on(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      'serialport',
+      (datum: SerialEvent) => {
+        if (!isOpen) {
+          setIsOpen(true);
         }
-        return [...prev, currentTitle];
-      });
-    });
+        const currentTitle = datum.title;
+        if (currentTitle !== 'default' || !titles.includes(currentTitle)) {
+          setTitles((prev) => {
+            return [...prev, currentTitle];
+          });
+        }
+      }
+    );
+
+    return () => {
+      if (removeListener) removeListener();
+    };
   }, [isOpen, titles]);
 
   return (
