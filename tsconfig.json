@@ -15,7 +15,6 @@
     "allowJs": true,
     "outDir": ".erb/dll",
     "forceConsistentCasingInFileNames": true,
-    "noEmitOnError": false,
   },
   "exclude": ["test", "release/build", "release/app/dist", ".erb/dll"]
 }
