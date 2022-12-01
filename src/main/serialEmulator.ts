@@ -1,4 +1,4 @@
-import { SerialPort, ReadlineParser } from 'serialport';
+import { ReadlineParser } from 'serialport';
 import { MockBinding } from '@serialport/binding-mock';
 import { SerialPortStream } from '@serialport/stream';
 import { BrowserWindow } from 'electron';
@@ -14,10 +14,10 @@ function emulateData(range: number, title: string, chartType: string) {
 
 function parseData(data: string) {
   if (data.includes(delimiter)) {
-    const [title, value, chartType] = data.split(delimiter);
-    return { title, value, chartType };
+    const [title, value] = data.split(delimiter);
+    return { title, value };
   }
-  return { title: 'default', value: data, chartType: ChartType.Raw };
+  return { title: 'default', value: data };
 }
 
 function emulateSerial(window: BrowserWindow, portName: string) {

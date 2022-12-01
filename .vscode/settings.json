@@ -32,5 +32,6 @@
         "format": "expanded",
         "extensionName": ".css",
         "savePath": "./src/renderer"
-    }]
+    }
+  ],
 }

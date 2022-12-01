@@ -1,16 +1,6 @@
+import asComPortInfoArray, { ComPortInfo } from 'config/PortType';
 import React, { useState, useMemo, FC, useEffect } from 'react';
 import Dropdown from 'react-dropdown';
-
-type ComPortInfo = {
-  friendlyName: string;
-  locationId: string;
-  manufacturer: string;
-  path: string;
-  pnpId: string;
-  productId: string;
-  serialNumber: string;
-  vendorId: string;
-};
 
 interface Props {
   isOpen: boolean;
@@ -31,14 +21,18 @@ const UtilityBar: FC<Props> = ({ isOpen, setIsOpen }) => {
   }, [ports]);
 
   function handlePortScan() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.electron.ipcRenderer.once('scanSerial', (arg: ComPortInfo[]) => {
+    if (!window?.electron?.ipcRenderer) return;
+    window.electron.ipcRenderer.once('scanSerial', (unknownArg: unknown) => {
+      let arg: ComPortInfo[];
+      try {
+        arg = asComPortInfoArray(unknownArg);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
       setPorts(arg);
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.electron.ipcRenderer.sendMessage('scanSerial', 'scan');
+    window.electron.ipcRenderer.sendMessage('scanSerial', ['scan']);
   }
 
   useEffect(() => {

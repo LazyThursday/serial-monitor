@@ -12,7 +12,7 @@ function parseData(data: string) {
 }
 
 export default function handleSerialPort(window: BrowserWindow) {
-  ipcMain.on('scanSerial', async (event, arg) => {
+  ipcMain.on('scanSerial', async (event) => {
     const results = await SerialPort.list();
     event.reply('scanSerial', results);
   });
@@ -33,7 +33,7 @@ export default function handleSerialPort(window: BrowserWindow) {
 
       console.log('serialport opened');
 
-      ipcMain.once('serialportClose', (_event, _args) => {
+      ipcMain.once('serialportClose', () => {
         serialport.removeAllListeners();
         try {
           serialport.close();

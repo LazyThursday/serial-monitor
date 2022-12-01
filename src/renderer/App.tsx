@@ -1,26 +1,28 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import asSerialEvent, { SerialEvent } from '../config/SerialType';
 import UtilityBar from './components/UtilityBar';
 import 'react-dropdown/style.css';
 import LineChartComponent from './components/LineChartComponent';
 import RawSerial from './components/RawSerial';
 import './App.css';
 
-type SerialEvent = {
-  title: string;
-  value: string;
-};
-
 function MainPage() {
   const [titles, setTitles] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const removeListener = window.electron.ipcRenderer.on(
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+    const removeListener = window?.electron?.ipcRenderer?.on(
       'serialport',
-      (datum: SerialEvent) => {
+      // TODO: add the type
+      (unknownDatum: unknown) => {
+        let datum: SerialEvent;
+        try {
+          datum = asSerialEvent(unknownDatum);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
         if (!isOpen) {
           setIsOpen(true);
         }

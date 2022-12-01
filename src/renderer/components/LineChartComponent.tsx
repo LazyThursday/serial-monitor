@@ -1,3 +1,4 @@
+import asSerialEvent, { SerialEvent } from 'config/SerialType';
 import { useEffect, useState, useMemo, FC } from 'react';
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
 
@@ -5,11 +6,6 @@ type UserPref = {
   min: number | null;
   max: number | null;
   range: number | null;
-};
-type SerialEvent = {
-  title: string;
-  value: string;
-  chartType: string;
 };
 interface Props {
   title: string;
@@ -24,11 +20,16 @@ const LineChartComponent: FC<Props> = ({ title }) => {
   });
 
   useEffect(() => {
-    const removeListener = window.electron.ipcRenderer.on(
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+    const removeListener = window?.electron?.ipcRenderer?.on(
       'serialport',
-      (datum: SerialEvent) => {
+      (unknownDatum: unknown) => {
+        let datum: SerialEvent;
+        try {
+          datum = asSerialEvent(unknownDatum);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
         if (datum.title === title) {
           setData((prev) => [
             ...prev,

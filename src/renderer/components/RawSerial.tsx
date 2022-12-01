@@ -1,20 +1,20 @@
+import asSerialEvent, { SerialEvent } from 'config/SerialType';
 import React, { useState, useEffect } from 'react';
-
-type SerialEvent = {
-  title: string;
-  value: string;
-  chartType: string;
-};
 
 const RawSerial = () => {
   const [data, setData] = useState<{ value: string; time: number }[]>([]);
 
   useEffect(() => {
-    const removeListener = window.electron.ipcRenderer.on(
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+    const removeListener = window?.electron?.ipcRenderer?.on(
       'serialport',
-      (datum: SerialEvent) => {
+      (unknownDatum: unknown) => {
+        let datum: SerialEvent;
+        try {
+          datum = asSerialEvent(unknownDatum);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
         if (datum.title === 'default') {
           setData((prev) => [
             ...prev,
