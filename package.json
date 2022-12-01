@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "description": "a serial monitor electron app",
   "keywords": [
     "electron",
