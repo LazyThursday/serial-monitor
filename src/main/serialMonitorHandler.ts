@@ -1,15 +1,14 @@
 import { SerialPort, ReadlineParser } from 'serialport';
 import { BrowserWindow, ipcMain } from 'electron';
-import ChartType from '../config/ChartType';
 
 const delimiter = '#';
 
 function parseData(data: string) {
   if (data.includes(delimiter)) {
-    const [title, value, chartType] = data.split(delimiter);
-    return { title, value, chartType };
+    const [title, value] = data.split(delimiter);
+    return { title, value };
   }
-  return { title: 'default', value: data, chartType: ChartType.Raw };
+  return { title: 'default', value: data };
 }
 
 export default function handleSerialPort(window: BrowserWindow) {

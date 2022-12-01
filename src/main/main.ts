@@ -105,7 +105,7 @@ const createWindow = async () => {
   });
 
   if (mainWindow) {
-    emulateSerial(mainWindow, 'COM22');
+    // emulateSerial(mainWindow, 'COM22');
     handleSerialPort(mainWindow);
   }
 

@@ -9,7 +9,6 @@ import './App.css';
 type SerialEvent = {
   title: string;
   value: string;
-  chartType: string;
 };
 
 function MainPage() {
@@ -26,11 +25,14 @@ function MainPage() {
           setIsOpen(true);
         }
         const currentTitle = datum.title;
-        if (currentTitle !== 'default' || !titles.includes(currentTitle)) {
-          setTitles((prev) => {
-            return [...prev, currentTitle];
-          });
-        }
+
+        // TODO: check outside of useState.
+        setTitles((prev) => {
+          if (currentTitle === 'default' || prev.includes(currentTitle)) {
+            return prev;
+          }
+          return [...prev, currentTitle];
+        });
       }
     );
 
