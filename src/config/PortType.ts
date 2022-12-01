@@ -1,12 +1,12 @@
 export type ComPortInfo = {
-  friendlyName: string;
-  locationId: string;
-  manufacturer: string;
+  friendlyName?: string;
+  locationId?: string;
+  manufacturer?: string;
   path: string;
-  pnpId: string;
-  productId: string;
-  serialNumber: string;
-  vendorId: string;
+  pnpId?: string;
+  productId?: string;
+  serialNumber?: string;
+  vendorId?: string;
 };
 
 function asComPortInfoArray(data: unknown): ComPortInfo[] {
@@ -24,13 +24,12 @@ function asComPortInfoArray(data: unknown): ComPortInfo[] {
         vendorId,
       } = datum as ComPortInfo;
       if (
-        typeof friendlyName === 'string' &&
-        typeof locationId === 'string' &&
-        typeof manufacturer === 'string' &&
-        typeof path === 'string' &&
-        typeof pnpId === 'string' &&
-        typeof productId === 'string' &&
-        typeof serialNumber === 'string' &&
+        (typeof path === 'string' && typeof friendlyName === 'string') ||
+        typeof locationId === 'string' ||
+        typeof manufacturer === 'string' ||
+        typeof pnpId === 'string' ||
+        typeof productId === 'string' ||
+        typeof serialNumber === 'string' ||
         typeof vendorId === 'string'
       ) {
         return {
