@@ -2,7 +2,8 @@
   "description": "a serial monitor electron app",
   "keywords": [
     "electron",
-    "boilerplate",
+    "serial",
+    "monitor",
     "react",
     "typescript",
     "ts",
@@ -168,8 +169,8 @@
     "webpack-merge": "^5.8.0"
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "Serial Monitor",
+    "appId": "org.erb.SerialMonitor",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -227,8 +228,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "LazyThursday",
+      "repo": "serial-monitor"
     }
   },
   "devEngines": {
