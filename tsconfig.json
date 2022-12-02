@@ -13,7 +13,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "outDir": ".erb/dll",
+    "outDir": "release/app/dist",
     "forceConsistentCasingInFileNames": true,
   },
   "exclude": ["test", "release/build", "release/app/dist", ".erb/dll"]

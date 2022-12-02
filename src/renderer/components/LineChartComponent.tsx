@@ -1,6 +1,6 @@
-import asSerialEvent, { SerialEvent } from 'config/SerialType';
 import { useEffect, useState, useMemo, FC } from 'react';
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import asSerialEvent, { SerialEvent } from '../../config/SerialType';
 
 type UserPref = {
   min: number | null;

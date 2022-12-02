@@ -1,5 +1,5 @@
-import asSerialEvent, { SerialEvent } from 'config/SerialType';
 import React, { useState, useEffect } from 'react';
+import asSerialEvent, { SerialEvent } from '../../config/SerialType';
 
 const RawSerial = () => {
   const [data, setData] = useState<{ value: string; time: number }[]>([]);

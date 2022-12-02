@@ -1,6 +1,6 @@
-import asComPortInfoArray, { ComPortInfo } from 'config/PortType';
 import React, { useState, useMemo, FC, useEffect } from 'react';
 import Dropdown from 'react-dropdown';
+import asComPortInfoArray, { ComPortInfo } from '../../config/PortType';
 
 interface Props {
   isOpen: boolean;
