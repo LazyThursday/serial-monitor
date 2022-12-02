@@ -86,7 +86,7 @@
       "release/app/dist"
     ],
     "transform": {
-      "^.+\\.(ts|js)x?$": "ts-jest"
+      "\\.(ts|tsx|js|jsx)$": "ts-jest"
     }
   },
   "dependencies": {
