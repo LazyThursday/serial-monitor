@@ -29,7 +29,7 @@ const RawSerial = () => {
     };
   }, []);
   return (
-    <div className="rawSerialWrapper">
+    <div className="chart-container rawSerialWrapper">
       <h2>Default Serial</h2>
       <div className="rawSerial">
         {data.map((datum) => (

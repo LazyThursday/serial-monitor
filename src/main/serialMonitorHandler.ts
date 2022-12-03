@@ -27,14 +27,16 @@ export default function handleSerialPort(window: BrowserWindow) {
 
       const parser = new ReadlineParser();
       serialport.pipe(parser);
-      parser.on('data', (data: string) => {
-        window?.webContents.send('serialport', parseData(data));
+      const parserRef = parser.on('data', (data: string) => {
+        const parsedData = parseData(data);
+        window?.webContents.send('serialport', parsedData);
       });
 
       console.log('serialport opened');
 
       ipcMain.once('serialportClose', () => {
         serialport.removeAllListeners();
+        parserRef.removeAllListeners();
         try {
           serialport.close();
         } catch (error) {

@@ -1,5 +1,5 @@
-import { useEffect, useState, useMemo, FC } from 'react';
-import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import { useEffect, useState, FC } from 'react';
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import asSerialEvent, { SerialEvent } from '../../config/SerialType';
 
 type UserPref = {
@@ -44,6 +44,11 @@ const LineChartComponent: FC<Props> = ({ title }) => {
     };
   }, [title]);
 
+  // Half solution for corrupt titles.
+  if (data.length === 0) {
+    return <div />;
+  }
+
   function updatePref(newValue: number, prefToChange: string) {
     // eslint-disable-next-line no-restricted-globals
     if (isNaN(newValue)) {
@@ -57,7 +62,7 @@ const LineChartComponent: FC<Props> = ({ title }) => {
     });
   }
 
-  const chartData = useMemo(() => {
+  function handleDataToShow() {
     const newArr = data.map((datum) => {
       const newTime = (Date.now() - datum.time) / 1000;
 
@@ -71,21 +76,20 @@ const LineChartComponent: FC<Props> = ({ title }) => {
     }
 
     return newArr;
-  }, [data, pref.range]);
+  }
 
-  const domain = useMemo(() => {
-    const onlyData: number[] = chartData.map((datum) => datum.value);
-    const min = pref.min !== null ? pref.min : Math.min(...onlyData);
-    const max =
-      pref.max !== null && !(pref.max <= min)
-        ? pref.max
-        : Math.max(...onlyData);
-    return { min, max };
-  }, [chartData, pref.max, pref.min]);
+  const chartData = handleDataToShow();
+
+  const onlyData: number[] = chartData.map((datum) => datum.value);
+  const min = pref.min !== null ? pref.min : Math.min(...onlyData);
+  const max =
+    pref.max !== null && !(pref.max <= min) ? pref.max : Math.max(...onlyData);
+
+  const domain = { min, max };
 
   return (
     <div className="chart-container">
-      <h1>{title}</h1>
+      <h1 className="title">{title}</h1>
       <label htmlFor="min">
         min:
         <input
@@ -116,12 +120,13 @@ const LineChartComponent: FC<Props> = ({ title }) => {
           }
         />
       </label>
-      <LineChart width={1000} height={300} data={chartData}>
-        <Line type="monotone" dataKey="value" stroke="#c2d5ff" />
-        {/* <CartesianGrid stroke="#ccc" /> */}
-        <XAxis dataKey="time" />
-        <YAxis domain={[domain.min, domain.max]} />
-      </LineChart>
+      <ResponsiveContainer width="100%" height={400}>
+        <LineChart width={1000} height={300} data={chartData}>
+          <Line type="monotone" dataKey="value" stroke="#626ed4" />
+          <XAxis dataKey="time" />
+          <YAxis domain={[domain.min, domain.max]} />
+        </LineChart>
+      </ResponsiveContainer>
       <h2>{data.length}</h2>
     </div>
   );

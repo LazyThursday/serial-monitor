@@ -1,8 +1,4 @@
 .rawSerial {
-  background-color: #2b2b2b;
-  padding: 1.25rem;
-  border-radius: 1rem;
-  height: 50vh;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -28,8 +24,8 @@
 }
 
 .rawSerialWrapper {
-  background-color: #2b2b2b;
-  border-radius: 1rem;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.75rem;
   margin: 1rem;
+  min-height: 400px;
+  flex: 1 1 auto;
 }

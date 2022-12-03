@@ -44,12 +44,14 @@ function MainPage() {
   }, [isOpen, titles]);
 
   return (
-    <div className="chartsGroup-container">
+    <div>
       <UtilityBar isOpen={isOpen} setIsOpen={setIsOpen} />
-      <RawSerial />
-      {titles.map((title) => {
-        return <LineChartComponent title={title} key={title} />;
-      })}
+      <div className="chartsGroup-container">
+        <RawSerial />
+        {titles.map((title) => {
+          return <LineChartComponent title={title} key={title} />;
+        })}
+      </div>
     </div>
   );
 }

@@ -10,7 +10,7 @@
 body {
   position: relative;
   color: white;
-  background: #313233;
+  background-color: #222736;
   font-family: sans-serif;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -28,10 +28,11 @@ button {
   border-radius: 10px;
   border: none;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   font-size: 1.3rem;
-  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14);
+  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12),
+    0px 18px 88px -4px rgba(24, 39, 75, 0.14);
   transition: all ease-in 0.1s;
   cursor: pointer;
   opacity: 0.9;
@@ -69,8 +70,8 @@ input {
   font-size: 13px;
   color: rgb(247, 248, 248);
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   transition: border 0.15s ease 0s;
 }
 input:focus {
@@ -80,10 +81,18 @@ input:focus {
 }
 
 .chart-container {
-  background-color: #2b2b2b;
+  background: #2a3042;
   padding: 1.25rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   margin: 1rem;
+  min-width: 30%;
+  max-width: 60%;
+  flex: 1 1 auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .chart-container input {
   margin-bottom: 30px;
@@ -91,15 +100,14 @@ input:focus {
   margin-right: 2rem;
 }
 
-.chartGroup-container {
+.chartsGroup-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  width: 100vw;
 }
 
 .utilityBar {
@@ -123,10 +131,6 @@ input:focus {
 }
 
 .rawSerial {
-  background-color: #2b2b2b;
-  padding: 1.25rem;
-  border-radius: 1rem;
-  height: 50vh;
   overflow-y: scroll;
   /* Track */
   /* Handle */
@@ -148,8 +152,8 @@ input:focus {
 }
 
 .rawSerialWrapper {
-  background-color: #2b2b2b;
-  border-radius: 1rem;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.75rem;
   margin: 1rem;
+  min-height: 400px;
+  flex: 1 1 auto;
 }
