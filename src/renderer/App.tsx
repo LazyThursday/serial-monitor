@@ -1,5 +1,5 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import asSerialEvent, { SerialEvent } from '../config/SerialType';
 import UtilityBar from './components/UtilityBar';
 import 'react-dropdown/style.css';
@@ -9,7 +9,10 @@ import './App.css';
 
 function MainPage() {
   const [titles, setTitles] = useState<string[]>([]);
+  const [blockedTitles, setBlockedTitles] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const blockedTitlesRef = useRef(blockedTitles);
 
   useEffect(() => {
     const removeListener = window?.electron?.ipcRenderer?.on(
@@ -30,7 +33,11 @@ function MainPage() {
 
         // TODO: check outside of useState.
         setTitles((prev) => {
-          if (currentTitle === 'default' || prev.includes(currentTitle)) {
+          if (
+            currentTitle === 'default' ||
+            prev.includes(currentTitle) ||
+            blockedTitlesRef.current.includes(currentTitle)
+          ) {
             return prev;
           }
           return [...prev, currentTitle];
@@ -43,13 +50,21 @@ function MainPage() {
     };
   }, [isOpen, titles]);
 
+  function removeTitle(title: string) {
+    setBlockedTitles((prev) => [...prev, title]);
+    blockedTitlesRef.current = [...blockedTitlesRef.current, title];
+    setTitles((prev) => prev.filter((t) => t !== title));
+  }
+
   return (
     <div>
       <UtilityBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="chartsGroup-container">
         <RawSerial />
         {titles.map((title) => {
-          return <LineChartComponent title={title} key={title} />;
+          return (
+            <LineChartComponent title={title} isOpen={isOpen} key={title} />
+          );
         })}
       </div>
     </div>

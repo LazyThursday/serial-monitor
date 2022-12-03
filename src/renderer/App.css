@@ -5,6 +5,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Sarabun', 'sans-serif';
 }
 
 body {
@@ -86,7 +87,7 @@ input:focus {
   border-radius: 0.5rem;
   margin: 1rem;
   min-width: 30%;
-  max-width: 60%;
+  max-width: 1200px;
   flex: 1 1 auto;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -98,6 +99,33 @@ input:focus {
   margin-bottom: 30px;
   margin-left: 0.25rem;
   margin-right: 2rem;
+  background-color: #2e3648;
+  border-color: #363e54;
+}
+.chart-container h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+.chart-container .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+.chart-container .heading button {
+  height: 2.25rem;
+  width: 6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0;
+  background-color: transparent;
+  color: white;
+  border: 2px solid #363e54;
+}
+.chart-container .heading button:hover {
+  background-color: red;
+  border-color: transparent;
 }
 
 .chartsGroup-container {
@@ -107,14 +135,17 @@ input:focus {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  width: 100vw;
+  width: 100%;
 }
 
 .utilityBar {
+  background-color: #2a3142;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 15px 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 .utilityBar * {
   margin: 0 5px;

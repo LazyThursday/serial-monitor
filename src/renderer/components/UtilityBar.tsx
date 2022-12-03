@@ -1,5 +1,6 @@
 import React, { useState, useMemo, FC, useEffect } from 'react';
 import Dropdown from 'react-dropdown';
+import { VscDebugStop, VscDebugStart } from 'react-icons/vsc';
 import asComPortInfoArray, { ComPortInfo } from '../../config/PortType';
 
 interface Props {
@@ -55,7 +56,9 @@ const UtilityBar: FC<Props> = ({ isOpen, setIsOpen }) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     window.electron.ipcRenderer.sendMessage('serialportClose');
-    setIsOpen(false);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 500);
   }
 
   function handlePortChange(value: string) {
@@ -75,12 +78,12 @@ const UtilityBar: FC<Props> = ({ isOpen, setIsOpen }) => {
         placeholder="Select an option"
       />
       {isOpen ? (
-        <button type="button" onClick={handlePortStop}>
-          Stop
+        <button type="button" title="stop" onClick={handlePortStop}>
+          <VscDebugStop />
         </button>
       ) : (
-        <button type="button" onClick={handlePortStart}>
-          Start
+        <button type="button" title="start" onClick={handlePortStart}>
+          <VscDebugStart />
         </button>
       )}
     </div>

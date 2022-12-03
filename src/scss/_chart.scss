@@ -4,7 +4,7 @@
   border-radius: 0.5rem;
   margin: 1rem;
   min-width: 30%;
-  max-width: 60%;
+  max-width: 1200px;
   flex: 1 1 auto;
   user-select: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -13,6 +13,36 @@
     margin-bottom: 30px;
     margin-left: 0.25rem;
     margin-right: 2rem;
+    background-color: #2e3648;
+    border-color: #363e54;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+  }
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    button {
+      height: 2.25rem;
+      width: 6rem;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0;
+      background-color: transparent;
+      color: white;
+      border: 2px solid #363e54;
+
+      &:hover {
+        background-color: red;
+        border-color: transparent;
+      }
+    }
   }
 }
 
@@ -21,5 +51,5 @@
   flex-direction: row;
   flex-wrap: wrap;
   height: fit-content;
-  width: 100vw;
+  width: 100%;
 }

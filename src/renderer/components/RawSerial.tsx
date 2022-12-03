@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { RxCross2 } from 'react-icons/rx';
 import asSerialEvent, { SerialEvent } from '../../config/SerialType';
 
 const RawSerial = () => {
@@ -30,7 +31,18 @@ const RawSerial = () => {
   }, []);
   return (
     <div className="chart-container rawSerialWrapper">
-      <h2>Default Serial</h2>
+      <div className="heading">
+        <h1>Default Serial</h1>
+        <button
+          type="button"
+          title="clear all"
+          onClick={() => {
+            setData([]);
+          }}
+        >
+          Clear all
+        </button>
+      </div>
       <div className="rawSerial">
         {data.map((datum) => (
           <p key={datum.time}>{datum.value}</p>
