@@ -5,6 +5,7 @@
   margin: 1rem;
   min-width: 30%;
   max-width: 1200px;
+  max-height: 400px;
   flex: 1 1 auto;
   user-select: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -15,6 +16,18 @@
     margin-right: 2rem;
     background-color: #2e3648;
     border-color: #363e54;
+  }
+
+  input[type='range'] {
+    -webkit-appearance: none;
+    height: 5px;
+    padding: 0;
+    border-radius: 20px;
+    background: #363e54;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
   }
 
   h1 {

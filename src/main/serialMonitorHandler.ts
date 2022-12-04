@@ -25,6 +25,13 @@ export default function handleSerialPort(window: BrowserWindow) {
         baudRate: arg.baudRate,
       });
 
+      const removeSerialSendListener = ipcMain.on(
+        'sendSerial',
+        (_, payload: { title: string; value: number }) => {
+          serialport.write(`${payload.title}${payload.value}\n`);
+        }
+      );
+
       const parser = new ReadlineParser();
       serialport.pipe(parser);
       const parserRef = parser.on('data', (data: string) => {
@@ -37,12 +44,13 @@ export default function handleSerialPort(window: BrowserWindow) {
       ipcMain.once('serialportClose', () => {
         serialport.removeAllListeners();
         parserRef.removeAllListeners();
+        removeSerialSendListener.removeAllListeners();
         try {
           serialport.close();
+          console.log('serialport closed');
         } catch (error) {
           console.log(error);
         }
-        console.log('serialport closed');
       });
     }
   );

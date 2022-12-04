@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-export type Channels = 'serialport' | 'scanSerial';
+export type Channels = 'serialport' | 'scanSerial' | 'sendSerial';
 
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
