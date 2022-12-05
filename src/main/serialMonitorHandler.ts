@@ -27,7 +27,7 @@ export default function handleSerialPort(window: BrowserWindow) {
 
       const removeSerialSendListener = ipcMain.on(
         'sendSerial',
-        (_, payload: { title: string; value: number }) => {
+        (_, payload: { title: string; value: string }) => {
           serialport.write(`${payload.title}${payload.value}\n`);
         }
       );

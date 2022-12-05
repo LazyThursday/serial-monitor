@@ -5,7 +5,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Sarabun', 'sans-serif';
+  font-family: "Sarabun", "sans-serif";
 }
 
 body {
@@ -34,11 +34,10 @@ button {
   border-radius: 10px;
   border: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   font-size: 1.3rem;
-  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12),
-    0px 18px 88px -4px rgba(24, 39, 75, 0.14);
+  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14);
   transition: all ease-in 0.1s;
   cursor: pointer;
   opacity: 0.9;
@@ -76,8 +75,8 @@ input {
   font-size: 13px;
   color: rgb(247, 248, 248);
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   transition: border 0.15s ease 0s;
 }
 input:focus {
@@ -96,9 +95,9 @@ input:focus {
   max-height: 400px;
   flex: 1 1 auto;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .chart-container input {
@@ -108,7 +107,7 @@ input:focus {
   background-color: #2e3648;
   border-color: #363e54;
 }
-.chart-container input[type='range'] {
+.chart-container input[type=range] {
   -webkit-appearance: none;
   height: 5px;
   padding: 0;
@@ -161,8 +160,7 @@ input:focus {
   align-items: center;
   justify-content: center;
   padding: 15px 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 .utilityBar * {
   margin: 0 5px;
@@ -203,4 +201,26 @@ input:focus {
 }
 .rawSerialWrapper::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.inputs-container .add-container {
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.inputs-container .add-container input {
+  background-color: white;
+  border-color: rgb(151, 152, 158);
+  height: 100%;
+  width: 50%;
+  max-width: 200px;
+  margin: 0;
+  padding: 0;
+  margin-right: 10px;
+}
+.inputs-container .add-container button {
+  height: 100%;
+  border-radius: 2px;
 }

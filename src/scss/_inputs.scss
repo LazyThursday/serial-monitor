@@ -1,0 +1,24 @@
+.inputs-container {
+  .add-container {
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    input {
+      background-color: white;
+      border-color: rgb(151, 152, 158);
+      height: 100%;
+      width: 50%;
+      max-width: 200px;
+      margin: 0;
+      padding: 0;
+      margin-right: 10px;
+    }
+
+    button {
+      height: 100%;
+      border-radius: 2px;
+    }
+  }
+}
