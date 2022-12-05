@@ -1,21 +1,24 @@
 .inputs-container {
   .add-container {
     height: 35px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: start;
+
     input {
       background-color: white;
       border-color: rgb(151, 152, 158);
       color: black;
       font-size: large;
       height: 100%;
-      width: 50%;
+      width: 50px;
       max-width: 200px;
       margin: 0;
       padding: 0 5px;
       margin-right: 20px;
+      letter-spacing: 8px;
     }
 
     button {
@@ -28,32 +31,92 @@
       font-size: medium;
     }
   }
-
-  .controller {
+  .controllers-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    padding: 0 20px;
-    margin: 15px 0;
-    height: 40px;
-    width: 50%;
+    flex-wrap: wrap;
+    margin-top: 10px;
 
-    background-color: rgba(0, 0, 0, 0.119);
-    border-radius: 5px;
+    .controller {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0 20px;
+      margin: 15px 5px;
+      height: 40px;
+      min-width: 30%;
+      max-width: 60%;
+      flex-grow: 1;
 
-    label {
-      margin-right: 1rem;
-    }
+      background-color: rgba(0, 0, 0, 0.119);
+      border-radius: 5px;
 
-    input {
-      margin: 0;
-      background-color: transparent;
-      border-bottom-color: #02a499;
-      width: 100%;
-    }
+      label {
+        margin-right: 1rem;
+      }
 
-    input[type='range'] {
-      background-color: #02a499;
+      input {
+        margin: 0;
+        background-color: transparent;
+        border-bottom-color: #02a499;
+        width: 100%;
+      }
+
+      input[type='range'] {
+        background-color: #02a499;
+      }
+
+      input[type='button'] {
+        align-items: center;
+        appearance: none;
+        background-color: #02a499;
+        border-radius: 4px;
+        border-width: 0;
+        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+          rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #046761 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: #36395a;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: 'JetBrains Mono', monospace;
+        height: 50%;
+        justify-content: center;
+
+        padding-left: 16px;
+        padding-right: 16px;
+        position: relative;
+        text-align: left;
+        text-decoration: none;
+        transition: box-shadow 0.15s, transform 0.15s;
+        user-select: none;
+        font-size: 18px;
+        &:hover {
+          transition: all 0.2s;
+          box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+            rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #034f4a 0 -3px 0 inset;
+          background-color: #048a81;
+        }
+
+        &:active {
+          box-shadow: #034f4a 0 2px 5px inset;
+          transform: translateY(2px);
+        }
+      }
+
+      .delete-button {
+        padding: 2px 5px;
+        margin-left: 10px;
+        border: solid 1px transparent;
+        border-radius: 5px;
+        background-color: transparent;
+        color: white;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.2);
+          color: red;
+          border: solid 1px red;
+        }
+      }
     }
   }
 }

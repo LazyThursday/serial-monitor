@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Dropdown from 'react-dropdown';
+import { FaTrashAlt } from 'react-icons/fa';
 
 type Controllers = {
   [key: string]: { value: string; isNumber: boolean; type: string };
@@ -16,7 +17,7 @@ const Inputs = () => {
   const options = ['text', 'range', 'button'];
 
   const handleAddController = () => {
-    if (newController === undefined) return;
+    if (newController === undefined || newController.title.length !== 3) return;
     setControllers((prev: Controllers) => {
       return {
         ...prev,
@@ -87,6 +88,20 @@ const Inputs = () => {
                 value={controller.value}
                 onChange={handleInputChange}
               />
+              <button
+                className="delete-button"
+                type="button"
+                title="delete"
+                onClick={() => {
+                  setControllers((prev) => {
+                    const newControllers = { ...prev };
+                    delete newControllers[controllerKey];
+                    return newControllers;
+                  });
+                }}
+              >
+                <FaTrashAlt size={15} />
+              </button>
             </div>
           );
         })}
