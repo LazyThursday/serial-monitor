@@ -11,9 +11,9 @@ const Inputs = () => {
     title: string;
     isNumber: boolean;
     type: string;
-  }>();
+  }>({ title: '', isNumber: false, type: '' });
 
-  const options = ['input', 'range', 'button'];
+  const options = ['text', 'range', 'button'];
 
   const handleAddController = () => {
     if (newController === undefined) return;
@@ -31,7 +31,7 @@ const Inputs = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
-    if (controllers.id.isNumber && Number.isNaN(Number(value))) return;
+    if (controllers[id].isNumber && Number.isNaN(Number(value))) return;
     setControllers((prev: Controllers) => {
       return {
         ...prev,
@@ -52,21 +52,22 @@ const Inputs = () => {
         <input
           title="New Title"
           name="title"
+          value={newController?.title}
           onChange={(e) => {
-            const { name, value } = e.target;
+            const { value } = e.target;
+            if (value.length > 3) return;
             setNewController((prev) => {
-              if (prev === undefined) return prev;
-              return { ...prev, [name]: value };
+              return { ...prev, title: value };
             });
           }}
         />
         <Dropdown
           options={options}
-          value="input"
+          value="choose a type.."
           onChange={(e) => {
             setNewController((prev) => {
               if (prev === undefined) return prev;
-              return { ...prev, type: e.value };
+              return { ...prev, type: e.value, isNumber: e.value === 'range' };
             });
           }}
         />
@@ -74,20 +75,22 @@ const Inputs = () => {
           Add
         </button>
       </div>
-      {Object.keys(controllers).map((controllerKey) => {
-        const controller = controllers[controllerKey];
-        return (
-          <div key={controllerKey}>
-            <label htmlFor={controllerKey}>{controllerKey}</label>
-            <input
-              id={controllerKey}
-              type={controller.type}
-              value={controller.value}
-              onChange={handleInputChange}
-            />
-          </div>
-        );
-      })}
+      <div className="controllers-container">
+        {Object.keys(controllers).map((controllerKey) => {
+          const controller = controllers[controllerKey];
+          return (
+            <div key={controllerKey} className="controller">
+              <label htmlFor={controllerKey}>{controllerKey}</label>
+              <input
+                id={controllerKey}
+                type={controller.type}
+                value={controller.value}
+                onChange={handleInputChange}
+              />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
