@@ -1,5 +1,11 @@
-.rawSerial {
+.rawSerialWrapper {
+  padding: 1rem 0.75rem;
+  margin: 1rem;
+  min-height: 400px;
   overflow-y: scroll;
+
+  max-width: 50%;
+  flex: 1 1 auto;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -7,6 +13,7 @@
 
   /* Track */
   &::-webkit-scrollbar-track {
+    margin: 15px 0px;
     background: #f1f1f1;
     border-radius: 10px;
   }
@@ -21,11 +28,4 @@
   &::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-}
-
-.rawSerialWrapper {
-  padding: 1rem 0.75rem;
-  margin: 1rem;
-  min-height: 400px;
-  flex: 1 1 auto;
 }

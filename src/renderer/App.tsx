@@ -5,6 +5,7 @@ import UtilityBar from './components/UtilityBar';
 import 'react-dropdown/style.css';
 import LineChartComponent from './components/LineChartComponent';
 import RawSerial from './components/RawSerial';
+import Inputs from './components/Inputs';
 import './App.css';
 
 function MainPage() {
@@ -61,6 +62,7 @@ function MainPage() {
       <UtilityBar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="chartsGroup-container">
         <RawSerial />
+        <Inputs />
         {titles.map((title) => {
           return (
             <LineChartComponent title={title} isOpen={isOpen} key={title} />

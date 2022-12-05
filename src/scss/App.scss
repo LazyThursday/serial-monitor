@@ -23,6 +23,11 @@ body {
   align-items: center;
 }
 
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 button {
   background-color: white;
   padding: 10px 20px;
@@ -61,3 +66,4 @@ a:hover {
 @import 'chart';
 @import 'utilityBar';
 @import 'rawSerial';
+@import 'inputs';
