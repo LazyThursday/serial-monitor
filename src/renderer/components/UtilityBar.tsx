@@ -23,6 +23,7 @@ const UtilityBar: FC<Props> = ({ isOpen, setIsOpen }) => {
 
   function handlePortScan() {
     if (!window?.electron?.ipcRenderer) return;
+    setSelectedPort(null);
     window.electron.ipcRenderer.once('scanSerial', (unknownArg: unknown) => {
       let arg: ComPortInfo[];
       try {
@@ -74,7 +75,7 @@ const UtilityBar: FC<Props> = ({ isOpen, setIsOpen }) => {
         className="dropdown"
         options={options}
         onChange={(e) => handlePortChange(e.value)}
-        value="Select a port"
+        value={selectedPort ?? 'Select a port'}
         placeholder="Select an option"
       />
       {isOpen ? (

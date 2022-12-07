@@ -165,7 +165,6 @@ const LineChartComponent: FC<Props> = ({ title, isOpen }) => {
           {!isOpen ? <Tooltip /> : null}
         </LineChart>
       </ResponsiveContainer>
-      <h2>{data.length}</h2>
     </div>
   );
 };

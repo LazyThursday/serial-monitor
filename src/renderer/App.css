@@ -93,7 +93,6 @@ input:focus {
   margin: 1rem;
   min-width: 30%;
   max-width: 1200px;
-  max-height: 400px;
   flex: 1 1 auto;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -182,6 +181,7 @@ input:focus {
   padding: 1rem 0.75rem;
   margin: 1rem;
   min-height: 400px;
+  max-height: 500px;
   overflow-y: scroll;
   max-width: 50%;
   flex: 1 1 auto;
